@@ -1,0 +1,80 @@
+{
+  "./DailyMotion": [
+    {
+      "id": "oKWQ",
+      "file": "static/chunks/reactPlayerDailyMotion.4bba978b53521c44eca8.js"
+    }
+  ],
+  "./Facebook": [
+    {
+      "id": "nQ6K",
+      "file": "static/chunks/reactPlayerFacebook.1d7fff3e49f463f93ec0.js"
+    }
+  ],
+  "./FilePlayer": [
+    {
+      "id": "Nn5g",
+      "file": "static/chunks/reactPlayerFilePlayer.a87ef18b27efc52fcaea.js"
+    }
+  ],
+  "./Kaltura": [
+    {
+      "id": "4Xmi",
+      "file": "static/chunks/reactPlayerKaltura.07322a0bbe779b6564cb.js"
+    }
+  ],
+  "./Mixcloud": [
+    {
+      "id": "eywx",
+      "file": "static/chunks/reactPlayerMixcloud.a3288fcac7c991ce9fa5.js"
+    }
+  ],
+  "./Preview": [
+    {
+      "id": "0ZcZ",
+      "file": "static/chunks/reactPlayerPreview.8f551afc1a325d6c56e2.js"
+    }
+  ],
+  "./SoundCloud": [
+    {
+      "id": "W6fG",
+      "file": "static/chunks/reactPlayerSoundCloud.7a1800d761c65cc64970.js"
+    }
+  ],
+  "./Streamable": [
+    {
+      "id": "v4zF",
+      "file": "static/chunks/reactPlayerStreamable.9ee14669a06ee19f3798.js"
+    }
+  ],
+  "./Twitch": [
+    {
+      "id": "Vzir",
+      "file": "static/chunks/reactPlayerTwitch.3db7662cdbb57985180a.js"
+    }
+  ],
+  "./Vidyard": [
+    {
+      "id": "WvJM",
+      "file": "static/chunks/reactPlayerVidyard.2e8bcbcb1e946bb4620e.js"
+    }
+  ],
+  "./Vimeo": [
+    {
+      "id": "VkHn",
+      "file": "static/chunks/reactPlayerVimeo.e24aa29125e82c19f3ff.js"
+    }
+  ],
+  "./Wistia": [
+    {
+      "id": "3yWd",
+      "file": "static/chunks/reactPlayerWistia.5839db3ef9a061ab0996.js"
+    }
+  ],
+  "./YouTube": [
+    {
+      "id": "5RnD",
+      "file": "static/chunks/reactPlayerYouTube.0ca58a5e24917acdd9fb.js"
+    }
+  ]
+}

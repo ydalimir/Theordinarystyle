@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Container, Menu, Grid, Icon, Label, Button } from "semantic-ui-react";
+import { Container, Menu, Grid, Icon, Label } from "semantic-ui-react";
 import Link from "next/link";
+import { map } from "lodash";
 import BasicModal from "../../Modal/BasicModal";
 import Auth from "../../Auth";
 import useAuth from "../../../hooks/useAuth";
+import useCart from "../../../hooks/useCart";
 import { getMeApi } from "../../../api/user";
+import { getPlatformsApi } from "../../../api/platform";
 
 export default function MenuWeb() {
-
+  const [platforms, setPlatforms] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("Inicia sesión");
   const [user, setUser] = useState(undefined);
   const { auth, logout } = useAuth();
-
 
   useEffect(() => {
     (async () => {
@@ -21,98 +23,109 @@ export default function MenuWeb() {
     })();
   }, [auth]);
 
-
+  useEffect(() => {
+    (async () => {
+      const response = await getPlatformsApi();
+      setPlatforms(response || []);
+    })();
+  }, []);
 
   const onShowModal = () => setShowModal(true);
   const onCloseModal = () => setShowModal(false);
-  
-    return (
-        <div className="menu">
-          <Container>
-            <Grid>
-              <Grid.Column className="menu__left" width={6}>
-              <MenuPlatforms/>
-              </Grid.Column>
-              <Grid.Column className="menu__right" width={10}>
-              {user !== undefined && (
+
+  return (
+    <div className="menu">
+      <Container>
+        <Grid>
+          <Grid.Column className="menu__left" width={6}>
+            <MenuPlatforms platforms={platforms} />
+          </Grid.Column>
+          <Grid.Column className="menu__right" width={10}>
+            {user !== undefined && (
               <MenuOptions
                 onShowModal={onShowModal}
                 user={user}
                 logout={logout}
               />
             )}
-              </Grid.Column>
-            </Grid>
-
-          </Container>
-          <BasicModal
-          show={showModal}
+          </Grid.Column>
+        </Grid>
+      </Container>
+      <BasicModal
+      
+        show={showModal}
         setShow={setShowModal}
         title={titleModal}
-        size="small">
-            
-            <Auth onCloseModal={onCloseModal} setTitleModal={setTitleModal}  />
-          </BasicModal>
-          
-        </div>
-      );
+        size="small"
+      >
+        <Auth onCloseModal={onCloseModal} setTitleModal={setTitleModal} />
+      </BasicModal>
+    </div>
+  );
 }
 
-function MenuPlatforms() {
-   
-  
-    return (
-      <Menu>
-        
-          <Link href="/play-station">
-          <Menu.Item >
-             Playstation
-             </Menu.Item>
-          </Link>
-          <Link href="/xbox">
-          <Menu.Item >
-             xbox
-             </Menu.Item>
-          </Link>
-          <Link href="/switc">
-          <Menu.Item >
-          switc
-             </Menu.Item>
-          </Link>
-       
-      </Menu>
-    );
-  }
+function MenuPlatforms(props) {
+  const { platforms } = props;
 
+  return (
+    <Menu>
+      {map(platforms, (platform) => (
+        <Link href={`/games/${platform.url}`} key={platform._id}>
+          <Menu.Item className="font-semibold" as="a" name={platform.url}>
+            {platform.title}
+          </Menu.Item>
+        </Link>
+      ))}
+    </Menu>
+  );
+}
 
-  function MenuOptions(props) {
-    const { onShowModal, user, logout } = props;
-   
-    return (
-        <Menu>
-             {user ? (
+function MenuOptions(props) {
+  const { onShowModal, user, logout } = props;
+  const { productsCart } = useCart();
+
+  return (
+    <Menu>
+      {user ? (
         <>
-          
-            <Menu.Item as="a">
-              <Icon name="game" />
+          <Link href="/orders">
+            <Menu.Item className="font-semibold" as="a">
+              <Icon name="eye dropper" />
               Mis pedidos
             </Menu.Item>
-       
+          </Link>
+          <Link href="/wishlist">
+            <Menu.Item className="font-semibold" as="a">
+              <Icon name="heart outline" />
+              Favoritos
+            </Menu.Item>
+          </Link>
+          <Link href="/account">
+            <Menu.Item className="font-semibold" as="a">
+              <Icon name="user outline" />
+              {user.name} {user.lastname}
+            </Menu.Item>
+          </Link>
+          <Link href="/cart">
+            <Menu.Item className="font-semibold" as="a" className="m-0">
+              <Icon name="cart" />
+              {productsCart > 0 && (
+                <Label color="red" floating circular>
+                  {productsCart}
+                </Label>
+              )}
+            </Menu.Item>
+          </Link>
           <Menu.Item className="m-0" onClick={logout}>
             <Icon name="power off" />
           </Menu.Item>
         </>
       ) : (
-        <Menu.Item onClick={onShowModal}>
+        <Menu.Item className="font-semibold" onClick={onShowModal}>
           <Icon name="user outline" />
           Mi cuenta
         </Menu.Item>
       )}
-            
-
-        </Menu>
-       
-     
-    );
-  }
-  
+    </Menu>
+  );
+}
