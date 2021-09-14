@@ -135,6 +135,8 @@ module.exports = {
          "fw": "1440px",
          'c_large': '1200px'
        },
+
+       
        maxHeight: {
          "36":"9rem",
          "40":"10rem",
@@ -166,6 +168,10 @@ module.exports = {
         '-6': '-6',
         '-12': '-12',
        },
+       backgroundImage: {
+        'hero-pattern': "url('http://gph.is/2ohuS2D')",
+       
+       },
        backgroundColor: {
         'primary': '#89bdf9',
         'light': '#f5f5f5',
@@ -179,3 +185,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+

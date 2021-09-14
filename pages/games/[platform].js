@@ -47,7 +47,7 @@ export default function Platform() {
         <div>
           <h3>No hay Productos</h3>
         </div>
-      )}
+      )}2626
       {size(games) > 0 && <ListGames games={games} />}
 
       {totalGames ? (
